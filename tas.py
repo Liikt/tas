@@ -6,7 +6,6 @@ import os
 
 from utils.secret import key
 from utils.utils import async_concurrent, setup
-from functions.reminder import pvp, quests
 
 
 # Global vars
