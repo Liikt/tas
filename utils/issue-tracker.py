@@ -23,6 +23,10 @@ So for example
 params:
     client: is the client object of the bot
     message: is the message the user typed without the ping
+    author: is the name of the user who submitted the issue
+
+returns:
+    nothing
 
 """
 async def create_issue(client, message):
