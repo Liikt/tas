@@ -1,0 +1,8 @@
+*secret.*
+__pycache__
+*.pyc
+daemon*
+*.bak
+*log/*
+*.idea
+*.sublime*
