@@ -1,5 +1,6 @@
 from utils.secret import githubtoken
 from github import Github
+from utils.logger import log
 
 r = None
 g = Github(githubtoken)
@@ -29,9 +30,24 @@ returns:
     nothing
 
 """
-async def create_issue(client, message):
-    submitter = ""
+async def create_issue(client, message, author):
     title = ""
+    issue_type = ""
     body = ""
 
-    r.create_issue(title=": ".join(submitter, title), body=body)
+    try:
+        issue_type, title, body = message.split(';')
+    except ValueError:
+        await client.send_message(message.channel, "I'm sorry but your issue request was malformed. Please write it like `<type of issue>; <title>; <body>`!")
+        return
+
+    if not title or not body:
+        await client.send_message(message.channel, "Please don't leave the title or the body empty!")
+        return
+
+    if issue_type not in ["suggestion", "issue"]:
+        await client.send_message(message.channel, "Please only use `suggestion` or `issue` as the type of issue!")
+        return
+
+    r.create_issue(title=": ".join(author, title), body=body)
+    log("INFO", "create_issue", "A new Issue from '{}' with the title '{}' was created".format(author, title))
