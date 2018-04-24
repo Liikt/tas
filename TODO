@@ -14,6 +14,10 @@ Bot functionality:
    ✘ Write the issues into the ToDo automatically? @created(18-04-24 14:09) @cancelled (18-04-24 15:04)
    ✔ use the github api @created(18-04-24 15:03) @done (18-04-24 15:04)
    ☐ be able to restrict people from creating issues to reduce spam @created(18-04-24 15:03)
+ 
+ ☐ Create a permission system @created(18-04-24 16:04)
+   ☐ restrict to channels @created(18-04-24 16:04)
+   ☐ restrict to users @created(18-04-24 16:05)
 
 --- ✄ -----------------------
 
