@@ -6,6 +6,7 @@ import os
 
 from utils.secret import key
 from utils.utils import async_concurrent, setup
+from utils.issue-tracker import create_issue
 
 
 # Global vars
@@ -26,19 +27,22 @@ async def on_ready():
     # Run the setup function
     await setup(client, name, game)
 
-    # Start the reminder functions
-    asyncio.ensure_future(async_concurrent(quests, client))
-    asyncio.ensure_future(async_concurrent(pvp, client))
-
 
 """
-on_message is a function that will be used to handle commands. Currently there are none so this
-function does nothing.
+on_message is a function that will be used to handle commands.
 
 Takes the current message as a parameter
 """
 @client.event
 async def on_message(message):
-    pass
+    # Make sure we only react on public channels
+    if not message.channel.is_private:
+        # Make sure the message is addressed to us and not from a bot as per discord TOS
+        if client.user in message.mentions and not message.author.bot:
+            m = " ".join(message.content.split()[1:])
+
+            if len(m) >= 1:
+                if m.split()[0] in ["suggestion", "issue"]:
+                    await create_issue(client, message.chanenl, m, message.author.name)
 
 client.run(key)
