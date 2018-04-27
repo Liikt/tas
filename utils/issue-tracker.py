@@ -1,5 +1,5 @@
-from utils.secret import githubtoken
 from github import Github
+from utils.secret import githubtoken
 from utils.logger import log
 
 r = None
